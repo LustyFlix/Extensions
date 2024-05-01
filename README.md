@@ -5,3 +5,5 @@
 > Added TV Shows
 
 > Added Anime
+
+> Added NSFW
