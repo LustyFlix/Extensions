@@ -1,4 +1,4 @@
-## Welcome to🌹LustyFlix Extensions🌹
+## Welcome to🌹Streamverse Extensions🌹
 
 > Added Movies
 
