@@ -1,5 +1,5 @@
 // use an integer for version numbers
-version = 28
+version = 1
 
 
 streamverse {
@@ -19,7 +19,6 @@ streamverse {
     status = 1 // will be 3 if unspecified
     tvTypes = listOf(
         "Movie",
-        "NSFW",
     )
 
     iconUrl = "https://pornwatch.ws/wp-content/uploads/2023/04/favicon-4.png"
