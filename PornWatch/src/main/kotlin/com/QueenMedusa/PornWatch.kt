@@ -10,6 +10,7 @@ import org.jsoup.nodes.Element
 import java.net.URI
 
 open class PornWatch : MainAPI() {
+	private val globalTvType = TvType.NSFW
     override var mainUrl = "https://pornwatch.ws/"
     private var directUrl = ""
     override var name = "PornWatch"
@@ -45,7 +46,7 @@ open class PornWatch : MainAPI() {
         "genre/swallowing" to "Swallowing",
         "genre/transsexual" to "Transsexual",
         "genre/virgin" to "Virgin",
-        "series" to "All TV Series",
+        "movies" to "Recently Added",
     )
 
     override suspend fun getMainPage(
@@ -64,7 +65,7 @@ open class PornWatch : MainAPI() {
         val href = fixUrl(this.selectFirst("a")?.attr("href").toString())
         val posterUrl = fixUrlNull(this.selectFirst("img")?.attr("src"))
 
-        return newMovieSearchResponse(title, href, TvType.Movie) {
+        return newMovieSearchResponse(title, href, globalTvType) {
             this.posterUrl = posterUrl
         }
     }
@@ -94,7 +95,7 @@ open class PornWatch : MainAPI() {
             it.toSearchResult()
         }
 
-        return newMovieLoadResponse(title, url, TvType.Movie, url) {
+        return newMovieLoadResponse(title, url, globalTvType, url) {
             this.posterUrl = poster
             this.year = year
             this.plot = description
