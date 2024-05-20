@@ -1,0 +1,8 @@
+{
+    "name": "Streamverse",
+    "description": "Streamverse Oficial Repository",
+    "manifestVersion": 1,
+    "pluginLists": [
+      "https://raw.githubusercontent.com/LustyFlix/Extensions/builds/plugins.json"
+    ]
+}
