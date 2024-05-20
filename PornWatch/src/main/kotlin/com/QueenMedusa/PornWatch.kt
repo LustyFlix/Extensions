@@ -46,7 +46,7 @@ open class PornWatch : MainAPI() {
         "genre/swallowing" to "Swallowing",
         "genre/transsexual" to "Transsexual",
         "genre/virgin" to "Virgin",
-        "movies" to "Recently Added",
+        "movies" to "Latest Porn Movies",
     )
 
     override suspend fun getMainPage(
@@ -84,13 +84,13 @@ open class PornWatch : MainAPI() {
         val document = request.document
         val title = document.selectFirst("div.mvic-desc h3")?.text()?.trim() ?: return null
         val poster = fixUrlNull(document.selectFirst("div.thumb.mvic-thumb img")?.attr("src"))
-        val tags = document.select("div.mvici-left p:nth-child(1) a").map { it.text() }
-        val year = document.select("div.mvici-right p:nth-child(3) a").text().trim().toIntOrNull()
+        val tags = document.select("div.mvici-left p:nth-child(5) a").map { it.text() }
+        val year = document.select("div.mvici-right p a").text().trim().toIntOrNull()
         val tvType = TvType.NSFW
-        val description = document.selectFirst("p.f-desc")?.text()?.trim()
+        val description = document.selectFirst("div.desc")?.text()?.trim()
         val trailer = fixUrlNull(document.select("iframe#iframe-trailer").attr("src"))
         val rating = document.select("div.mvici-right > div.imdb_r span").text().toRatingInt()
-        val actors = document.select("div.mvici-left p:nth-child(3) a").map { it.text() }
+        val actors = document.select("div.mvici-left p:nth-child(7) a").map { it.text() }
         val recommendations = document.select("div.ml-item").mapNotNull {
             it.toSearchResult()
         }
