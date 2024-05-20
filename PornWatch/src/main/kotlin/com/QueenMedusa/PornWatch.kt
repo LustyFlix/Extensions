@@ -64,7 +64,7 @@ open class PornWatch : MainAPI() {
         val title = this.selectFirst("div.qtip-title")?.text()?.trim() ?: return null
         val href = fixUrl(this.selectFirst("a")?.attr("href").toString())
         val posterUrl = fixUrlNull(this.selectFirst("img")?.attr("src"))
-        val quality = this.select("span.mli-info1").text()
+        val quality = getQualityFromString(this.select("span.mli-info1").text())
 
         return newMovieSearchResponse(title, href, globalTvType) {
             this.posterUrl = posterUrl
