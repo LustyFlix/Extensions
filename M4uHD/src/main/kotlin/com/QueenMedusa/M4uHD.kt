@@ -14,7 +14,7 @@ open class M4uHD : MainAPI() {
     private var directUrl = ""
     override var name = "M4uHD"
     override val hasMainPage = true
-    override var lang = "hi"
+    override var lang = "bn"
     override val supportedTypes = setOf(
         TvType.Movie,
         TvType.TvSeries,
@@ -62,17 +62,15 @@ open class M4uHD : MainAPI() {
         val document = request.document
         val title = document.selectFirst("ol.breadcrumb li:nth-child(3)")?.text()?.trim() ?: return null
         val poster = fixUrlNull(document.selectFirst("img.mvinfo")?.attr("src"))
-        val tags = document.select("ol li:nth-child(3) h4.h3-detail ").map { it.text() }
+        val tags = document.select("ol li:nth-child(3) h4.h3-detail span").map { it.text() }
         val year = document.select("div.mvici-right p:nth-child(3) a").text().trim()
             .toIntOrNull()
-        val tvType = if (document.selectFirst("div.les-content")
-                ?.select("a")?.size!! > 1 || document.selectFirst("ul.idTabs li strong")?.text()
-                ?.contains(Regex("(?i)(EP\\s?[0-9]+)|(episode\\s?[0-9]+)")) == true
+        val tvType = if (document.selectFirst("button.episode")?.size!! > 1")) == true
         ) TvType.TvSeries else TvType.Movie
         val description = document.selectFirst("pre")?.text()?.trim()
         val trailer = fixUrlNull(document.select("iframe#iframe-trailer").attr("src"))
-        val rating = document.select("ol li:nth-child(1) h4.h3-detail").text().toRatingInt()
-        val actors = document.select("div.mvici-left p:nth-child(3) a").map { it.text() }
+        val rating = document.select("ol li:nth-child(1) h4.h3-detail span").text().toRatingInt()
+        val actors = document.select("ol li:nth-child(4) h5.h3-detail span").map { it.text() }
         val recommendations = document.select("div.item").mapNotNull {
             it.toSearchResult()
         }
