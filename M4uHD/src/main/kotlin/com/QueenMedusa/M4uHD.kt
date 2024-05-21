@@ -63,9 +63,8 @@ open class M4uHD : MainAPI() {
         val title = document.selectFirst("ol.breadcrumb li:nth-child(3)")?.text()?.trim() ?: return null
         val poster = fixUrlNull(document.selectFirst("img.mvinfo")?.attr("src"))
         val tags = document.select("ol li:nth-child(3) h4.h3-detail span").map { it.text() }
-        val year = document.select("div.mvici-right p:nth-child(3) a").text().trim()
-            .toIntOrNull()
-        val tvType = if (document.selectFirst("button.episode")?.size!! > 1")) == true
+        val year = document.select("div.mvici-right p:nth-child(3) a").text().trim().toIntOrNull()
+        val tvType = if (document.selectFirst("button.episode")?.size!! > 1 == true
         ) TvType.TvSeries else TvType.Movie
         val description = document.selectFirst("pre")?.text()?.trim()
         val trailer = fixUrlNull(document.select("iframe#iframe-trailer").attr("src"))
